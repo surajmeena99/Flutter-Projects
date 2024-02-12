@@ -8,6 +8,7 @@ This repository containing a collection of all my small projects focused on the 
 * Chat App
 * Sqflite Notes App : (Sqflite Database operations)
 * FlutterWala API App : (CRUD Operations Using REST API )
+* Firebase Realtime Crud App : (CRUD operations using firebase for realtime database)
 * Expense Tracker App
 * NumberGuessingGame
 ## Get started with Flutter!
