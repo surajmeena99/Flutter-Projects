@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBYSDPmG2QjNLvJ34gVFbfAWsCx3RYZF58',
-    appId: '1:785943656345:android:cad9d820f97be4143cc508',
-    messagingSenderId: '785943656345',
+    apiKey: 'APIKEY',
+    appId: 'APPID',
+    messagingSenderId: 'MESSAGINGSENDERID',
     projectId: 'crud-realtime-99',
-    storageBucket: 'crud-realtime-99.appspot.com',
+    storageBucket: 'STORAGEBUCKET',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBX_TSAXIpSytN18nvO5ML-WUI5Jr_2tTw',
-    appId: '1:785943656345:ios:e9bd5decb4d339753cc508',
-    messagingSenderId: '785943656345',
+    apiKey: 'APIKEY',
+    appId: 'APPID',
+    messagingSenderId: 'MESSAGINGSENDERID',
     projectId: 'crud-realtime-99',
-    storageBucket: 'crud-realtime-99.appspot.com',
-    iosBundleId: 'com.example.realtimeCrudApp',
+    storageBucket: 'STORAGEBUCKET',
+    iosBundleId: 'IOSBUNDLEID',
   );
 }
