@@ -50,8 +50,13 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
-      body: FutureBuilder<Map<String, dynamic>?>(
-        future: _databaseService.getData(),
+      
+      // body: FutureBuilder<Map<String, dynamic>?>(
+      //   future: _databaseService.getData(),
+
+      body: StreamBuilder<Map<String, dynamic>?>(
+        stream: _databaseService.getData(),
+
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
