@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:realtime_crud_app/add_product.dart';
 import 'package:realtime_crud_app/db_services.dart';
@@ -50,29 +51,32 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
+
+      // body: StreamBuilder<DatabaseEvent>(
+      //   stream: _databaseService.getData(),
+
+      body: StreamBuilder<DatabaseEvent>(
+        stream: FirebaseDatabase.instance.ref().child('products').onValue,
       
-      // body: FutureBuilder<Map<String, dynamic>?>(
-      //   future: _databaseService.getData(),
-
-      body: StreamBuilder<Map<String, dynamic>?>(
-        stream: _databaseService.getData(),
-
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData) {
-            return const Center(child: Text('No data available'));
-          } else {            
-            final products = snapshot.data!.values.toList();  //...
+          } else {         
+            final data = snapshot.data!.snapshot.value as Map<dynamic, dynamic>?;  
+            if (data == null) {
+              return const Center(child: Text('No data available'));
+            }
+            final products = data.values.toList();
+            final productKeys = data.keys.toList();
             return ListView.builder(
               itemCount: products.length,
               itemBuilder: (context, index) {
-                final product = products[index];  //...
-                final productId = snapshot.data!.keys.toList()[index];  //...
+                final product = products[index] as Map<dynamic, dynamic>;
+                final productId = productKeys[index];
                 return ListTile(
-                  title: Text(product['name']),
+                  title: Text(product['name'].toString()),
                   subtitle: Text(product['price'].toString()),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -80,15 +84,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       IconButton(
                         icon: const Icon(Icons.edit),
                         onPressed: () {
-                          Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => EditProduct(id: productId, editProduct: product))
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => EditProduct(id: productId.toString(), editProduct: product)),
                           );
-                        }
+                        },
                       ),
                       IconButton(
                         icon: const Icon(Icons.delete),
                         onPressed: () {
-                          _deleteConfirmationDialog(productId);
+                          _deleteConfirmationDialog(productId.toString());
                         },
                       ),
                     ],
@@ -99,6 +104,60 @@ class _HomeScreenState extends State<HomeScreen> {
           }
         },
       ),
+
+      /*------------
+      body: FutureBuilder<DatabaseEvent>(
+      // body: FutureBuilder<DataSnapshot>(
+        future: _databaseService.getData(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {         
+            final data = snapshot.data!.snapshot.value as Map<dynamic, dynamic>?; /* for DatabaseEvent */
+            // final data = snapshot.data!.value as Map<dynamic, dynamic>?; /* for DataSnapshot */
+            if (data == null) {
+              return const Center(child: Text('No data available'));
+            }
+            final products = data.values.toList();
+            final productKeys = data.keys.toList();
+            return ListView.builder(
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                final product = products[index] as Map<dynamic, dynamic>;
+                final productId = productKeys[index];
+                return ListTile(
+                  title: Text(product['name'].toString()),
+                  subtitle: Text(product['price'].toString()),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.edit),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => EditProduct(id: productId.toString(), editProduct: product)),
+                          );
+                        },
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.delete),
+                        onPressed: () {
+                          _deleteConfirmationDialog(productId.toString());
+                        },
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
+          }
+        },
+      ),
+      ------------*/
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context,
