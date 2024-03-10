@@ -13,7 +13,7 @@ This repository containing a collection of all my small projects focused on the 
 * NumberGuessingGame
 ## Get started with Flutter!
 
-For help getting started with Flutter, view our online [Documentation](https://flutter.dev/)
+For help getting started with Flutter, view flutter online [Documentation](https://flutter.dev/)
 
 To get up to speed quickly, start with our [getting started guide!](https://docs.flutter.dev/get-started/install)
 
