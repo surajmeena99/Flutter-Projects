@@ -15,7 +15,7 @@ This repository containing a collection of all my small projects focused on the 
 
 For help getting started with Flutter, view flutter online [Documentation](https://flutter.dev/)
 
-To get up to speed quickly, start with our [getting started guide!](https://docs.flutter.dev/get-started/install)
+To get up to speed quickly, start with flutter [getting started guide!](https://docs.flutter.dev/get-started/install)
 
 
 If you found these projects useful, then please consider giving it a ⭐ on Github and sharing it with your friends via social media.
