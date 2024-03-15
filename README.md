@@ -11,6 +11,7 @@ This repository containing a collection of all my small projects focused on the 
 * Firebase Realtime Crud App : (CRUD operations using firebase for realtime database)
 * Expense Tracker App
 * NumberGuessingGame
+* Phonebook App : (Phone OTP Authentication)
 ## Get started with Flutter!
 
 For help getting started with Flutter, view flutter online [Documentation](https://flutter.dev/)
@@ -54,6 +55,8 @@ What did you learn while building this project?
 ✅ CRUD operations for Firebase database
 
 ✅ CRUD Operations Using REST API 
+
+✅ Firebase Authentication
 
 ✅ Google Geocoding and Geolocator services
 
